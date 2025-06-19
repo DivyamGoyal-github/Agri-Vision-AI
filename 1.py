@@ -5,9 +5,15 @@ import seaborn as sns
 import IPython.display as disp
 from branca.element import Figure
 import numpy as np
+from dotenv import load_dotenv  # added to load env variables
+import os                       # added for env var support
+
+load_dotenv(dotenv_path=".env.local")  # load env variables from .env.local
+
+PROJECT_ID = os.environ.get("PROJECT_ID")  # get project id from env
 
 ee.Authenticate()
-ee.Initialize(project = '')
+ee.Initialize(project=PROJECT_ID)  # modified to load project id from .env.local
  
 from folium import Map, Marker
 from folium.plugins import MarkerCluster
@@ -112,19 +118,23 @@ GeoJson(
 fig1.save("map.html")
 print("✅ Map with GeoJSON layer saved as 'map.html'. Open it in your browser.")
 
-
-ee.Authenticate()
-
-ee.Initialize()
+ee.Initialize(project=PROJECT_ID)  # modified to load project id from .env.local
 
 coords = watershed['features'][0]['geometry']['coordinates']
 aoi = ee.Geometry.Polygon(coords)
 
 
-image = ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(aoi).filterDate('2022-08-01', '2022-12-31').first().clip(aoi);
+image = ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(aoi).filterDate('2024-08-01', '2024-12-31').first().clip(aoi);
 image.bandNames().getInfo()
 
 url = image.select('VV').getThumbURL({'min': -20, 'max': 0})
 disp.Image(url=url, width=800)
+image.bandNames().getInfo()
+
+url = image.select('VV').getThumbURL({'min': -20, 'max': 0})
+disp.Image(url=url, width=800)
+
+# image = ee.Image("COPERNICUS/S2/20220101T000239_20220101T000239_T56MNL")
+# print(image.getInfo())
 
 
