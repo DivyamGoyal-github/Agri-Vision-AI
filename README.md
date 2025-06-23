@@ -7,10 +7,12 @@ To empower farmers with an AI-driven solution that enables early, accessible, an
 ## Objectives
 
 - Build an AI model that can classify crop diseases from images
+- To give information on various parameters regarding the current crop status
 - Integrate a user-friendly interface for farmers to upload images
 - Link the model output to a language model (LLM) that provides treatment suggestions
 - Support multilingual and voice-based interaction to ensure inclusivity
 - Ensure robustness and scalability of the solution for real-world deployment
+- To generate comprehensive reports regarding the crops, including news of seasonal and anomalous hazards if possible
 
 ## DataSets Used
 After extensive research and evaluation of multiple publicly available plant disease datasets, the following most relevant and diverse sources were selected and merged. Through careful augmentation and balancing, a unified dataset has been created, consisting of 77 well-defined classes with approximately 1,290 images per class, ensuring consistency, diversity, and robustness for model training.
